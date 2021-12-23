@@ -1,0 +1,79 @@
+@import '../../../styles/variables.scss';
+
+.header {
+  position: relative;
+  height: 84px;
+  width: 100%;
+  background-color: $main-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    height: auto;
+    padding: 28px 42px;
+    row-gap: 25px;
+  }
+
+  .logo {
+    width: 243px;
+
+    @media (max-width: 767px) {
+      width: 180px;
+    }
+
+    a {
+      color: #fff;
+      font: normal normal bold 40px/53px 'Open Sans';
+      text-decoration: none;
+      @media (max-width: 767px) {
+        font-size: 32px;
+      }
+
+      img {
+        width: 180px;
+      }
+    }
+  }
+
+  .navbar {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+
+    .navitem {
+      cursor: pointer;
+
+      a {
+        padding: 5px;
+        z-index: -1;
+        display: block;
+
+        &:hover {
+          transition: all 0.2s ease-in-out;
+          background-color: rgba(255, 255, 255, 0.233);
+          border-radius: 10px;
+        }
+      }
+    }
+
+    .wallet-address {
+      margin-left: 10px;
+      display: inline-block;
+      background: #191919;
+      border-radius: 5px;
+      padding: 9px 16px;
+      width: 158px;
+      color: #ffffff;
+      font: normal normal normal 14px/19px 'Open Sans';
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}

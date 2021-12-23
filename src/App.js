@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { BrowserRouter } from 'react-router-dom';
+import Middlewares from './middleware';
+import ErrorPage from './components/ErrorPage';
+import SuspenseFallback from './components/SuspenseFallback';
+import AppRoutes from './routes';
+import './styles/app.scss';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ErrorBoundary FallbackComponent={ErrorPage}>
+      {/* <Middlewares> */}
+      <BrowserRouter>
+        <Suspense fallback={<SuspenseFallback />}>
+          <AppRoutes />
+        </Suspense>
+      </BrowserRouter>
+      {/* </Middlewares> */}
+    </ErrorBoundary>
   );
-}
+};
 
 export default App;

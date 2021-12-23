@@ -1,0 +1,42 @@
+input {
+  width: 100%;
+  background-color: #161616;
+  border-radius: 5px;
+  border: 1px solid #383838;
+  padding: 9px 16px;
+  font: normal normal normal 14px/19px 'Open Sans';
+  letter-spacing: 0px;
+  transition: all 0.25s ease-out;
+  color: #b1b1b1;
+  outline: none;
+
+  &:focus {
+    // border: 2px solid #6366f1;
+    // outline: 2px solid transparent;
+    // outline-offset: 2px;
+    // box-sizing: border-box;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.input-alert {
+  margin-top: 12px;
+  font: normal normal normal 12px/17px 'Open Sans';
+  letter-spacing: 0px;
+  color: #f2f3fb;
+
+  a {
+    font: normal normal normal 12px/17px 'Open Sans';
+    letter-spacing: 0px;
+    color: #ff1645;
+    text-decoration: none;
+
+    &:hover {
+      transition: all ease-in-out 0.3s;
+      color: #c50d32;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+@import '../../styles/variables.scss';
+
+.btn,
+[role='button'] {
+  cursor: pointer;
+}
+
+.btn {
+  font: normal normal bold 14px/19px 'Open Sans';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 0;
+  border-radius: 5px;
+  padding: 9px 25px;
+  font-size: 1rem;
+  color: $white;
+  transition: all 0.3s ease-out;
+}
+
+.btn-primary {
+  background: #ff1645;
+  font-weight: 500;
+  &:not(:disabled):hover {
+    background: rgba(255, 22, 69, 0.8);
+  }
+  &:disabled {
+    cursor: default !important;
+    opacity: 0.6;
+  }
+}
+
+.btn-secondary {
+  background: #7701ff;
+  font-weight: 500;
+  &:not(:disabled):hover {
+    background: rgba(119, 1, 255, 0.8);
+  }
+  &:disabled {
+    cursor: default !important;
+    opacity: 0.6;
+  }
+}
+
+.btn-dark {
+  background: #303030;
+  font-weight: 500;
+  &:not(:disabled):hover {
+    background: rgba(48, 48, 48, 0.8);
+  }
+  &:disabled {
+    cursor: default !important;
+    opacity: 0.6;
+  }
+}

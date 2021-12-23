@@ -1,0 +1,94 @@
+@import 'variables';
+@import 'text';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  letter-spacing: 1;
+  font-family: 'Open Sans';
+}
+
+* {
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.icon {
+  vertical-align: middle;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.spinner {
+  animation: spinner-animation 2s linear infinite;
+  max-width: 100px;
+}
+
+.spinner circle {
+  animation: circle-animation 1.4s ease-in-out infinite both;
+}
+
+@keyframes circle-animation {
+  0%,
+  25% {
+    stroke-dashoffset: 280;
+    transform: rotate(0);
+  }
+  50%,
+  75% {
+    stroke-dashoffset: 75;
+    transform: rotate(45deg);
+  }
+  to {
+    stroke-dashoffset: 280;
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes spinner-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@-webkit-keyframes autofill {
+  0%,
+  100% {
+    color: #666;
+    background: transparent;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
