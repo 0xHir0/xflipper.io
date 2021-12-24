@@ -58,15 +58,12 @@ const RankingPanel = () => {
         force: false,
       }
 
-      console.log('PARAM:, ', param)
-
       const result = await axios.post(
         'https://api.xflipper.io/collection',
         param,
       )
 
       const { status, statusCode, message } = result.data
-      console.log('HERE: ', status, statusCode)
 
       if (statusCode === 404 || statusCode === 500 || status === 'error') {
         setHasNotNFT(true)
@@ -134,8 +131,6 @@ const RankingPanel = () => {
   const fetchCollectionData = async (dataUrl) => {
     try {
       setLoading(true)
-
-      console.log('before send request')
       const result = await axios.request(dataUrl, {
         headers: {
           accept: '*/*',
@@ -144,12 +139,10 @@ const RankingPanel = () => {
 
       setResponse(result.data)
     } catch (e) {
-      console.log('error during request')
       toast.error(e.message, {
         appearance: 'error',
       })
     } finally {
-      console.log('send request success')
       setLoading(false)
     }
   }
@@ -159,6 +152,30 @@ const RankingPanel = () => {
   }
 
   useEffect(() => {
+    async function fetchData(token_ids, limit) {
+      let req = "";
+      token_ids.forEach((id, index) => {
+        req = req + "token_ids=" + id;
+        if(index < token_ids.length-1) {
+          req += "&";
+        }
+      })
+      req += `&asset_contract_address=0x9A534628B4062E123cE7Ee2222ec20B86e16Ca8F&limit=${limit}`;
+      return await axios
+      .request(
+        `https://api.opensea.io/api/v1/assets?${req}`,
+        {
+          headers: {
+            accept: '*/*',
+          },
+        }
+      ).then(async (res) => {
+        return res.data.assets;
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+
     if (loggedIn) {
       const firstPageIndex = (parseInt(page) - 1) * parseInt(showPerPage)
       const lastPageIndex = firstPageIndex + parseInt(showPerPage)
@@ -193,7 +210,28 @@ const RankingPanel = () => {
           default:
             break
         }
-        setNfts(tempNFTs)
+        // setNfts(tempNFTs)
+        let token_ids = [];
+        token_ids = tempNFTs.map((nft, index) => nft.token_id);
+
+        fetchData(token_ids, showPerPage).then((res) => {
+          for (let i = 0 ; i < tempNFTs.length ; i++) {
+            let temp_sell_order;
+            let temp_owner;
+            for(let j = 0 ; j < res.length ; j++) {
+              if(res[j].token_id === tempNFTs[i].token_id){
+                temp_sell_order = res[j].sell_orders;
+                temp_owner = res[j].owner;
+                break;
+              }
+            }
+            tempNFTs[i].sell_orders = temp_sell_order;
+            tempNFTs[i].owner = temp_owner;
+          }
+          setNfts(tempNFTs)
+        }).catch((err) => {
+          console.log(err)
+        })
       }
     }
   }, [
@@ -226,8 +264,9 @@ const RankingPanel = () => {
         ) : (
           <>
             <div className='nft-panel'>
-              {nfts &&
+              {nfts && nfts.length > 0 &&
                 nfts.map((nft, index) => {
+                  console.log(nft)
                   return (
                     <RankingItem
                       token_id={nft.token_id}
@@ -240,6 +279,8 @@ const RankingPanel = () => {
                       delay={index * 500}
                       key={nft.token_id}
                       collectionID={nftContractAddress}
+                      owner = {nft.owner}
+                      sell_orders = {nft.sell_orders}
                     />
                   )
                 })}
