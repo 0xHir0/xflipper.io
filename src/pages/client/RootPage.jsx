@@ -10,7 +10,7 @@ const RootPage = ({ children }) => {
   const [status, setStatus] = useState();
   const [tokenId, setTokenId] = useState('');
   const [sortByOrder, setSortByOrder] = useState('Rank-High to Low');
-  const [showPerPage, setShowPerPage] = useState('20');
+  const [showPerPage, setShowPerPage] = useState('30');
   const [page, setPage] = useState('1');
   const [nftContractAddress, setNftContractAddress] = useState(''); // NFT contract search bar of Search Page
 

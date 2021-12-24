@@ -10,8 +10,8 @@ import { ReactComponent as InfoCircleIcon } from '../../../../assets/icons/icon-
 const sortOptions = ['Rank-High to Low', 'Rank-Low to High'];
 const defaultSortOption = 'Rank-High to Low';
 
-const showOptions = ['20', '50', '100'];
-const defaultShowOption = '50';
+const showOptions = ['5', '10', '30'];
+const defaultShowOption = '10';
 
 const SearchOption = () => {
   const {
@@ -91,7 +91,7 @@ const SearchOption = () => {
             handleChange={handleSortByOrder}
           />
         </div>
-        <div className='show-per-page'>
+        {/* <div className='show-per-page'>
           <div className='title'>Show per page</div>
           <Selectbox
             options={showOptions}
@@ -99,7 +99,7 @@ const SearchOption = () => {
             disabled={!loggedIn}
             handleChange={handleShowPerPage}
           />
-        </div>
+        </div> */}
         <div className='page'>
           <div className='title'>Page</div>
           <div className='grid-column-2'>
